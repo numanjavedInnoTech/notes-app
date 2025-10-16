@@ -1,4 +1,6 @@
 import { useState } from "react";
+import TextInput from "./inputs/TextInput";
+import SelectInput from "./inputs/SelectInput";
 
 const NoteForm = ({ notes, setNotes }) => {
     const [formData, setFormData] = useState({
@@ -26,34 +28,27 @@ const NoteForm = ({ notes, setNotes }) => {
             description: ''
         })
     }
+    const optionsPriority = [
+        {value:'High', label:'High'}, 
+        {value:'Medium', label:'Medium'}, 
+        {value:'Low', label:'Low'}
+    ];
+    const optionsCategory = [
+        {value:'Personal', label:'Personal'}, 
+        {value:'Work', label:'Work'}, 
+        {value:'Idea', label:'Idea'}
+    ];
     const formButton = <button onClick={(e) => {setIsFormVisible(!isFormVisible)}}
         className="w-full bg-gray-100 border border-gray-300 text-purple-800 py-2 rounded-lg cursor-pointer hover: bg-purple-200 hover: border-purple-300 transition mb4" >
         {isFormVisible  ? 'Hide Form x' : 'Add New Note +' }
     </button>
     const formNote = <form onSubmit={handleSubmit} action="" className="mb-6">
-        <div className="mb4">
-            <label htmlFor="title" className="block font-semibold">Title</label>
-            <input type="text" className="w-full p2 border rounded-lg" name="title" value={formData.title} 
-            onChange={handleChange} />
-        </div>
-        <div className="mb4">
-            <label htmlFor="priority" className="block font-semibold">Priority</label>
-            <select type="text" className="w-full p2 border rounded-lg" name="priority" value={formData.priority} 
-            onChange={handleChange}>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-            </select>
-        </div>
-        <div className="mb4">
-            <label htmlFor="category" className="block font-semibold">Category</label>
-            <select type="text" className="w-full p2 border rounded-lg" name="category" value={formData.category} 
-            onChange={handleChange}>
-                <option value="Work">Work</option>
-                <option value="Personal">Personal</option>
-                <option value="Ideas">Ideas</option>
-            </select>
-        </div>
+        <TextInput label="Title" name="title" value={formData.title} onChange={handleChange} required={false} />
+        <SelectInput label="Priority" name="priority" value={formData.priority} onChange={handleChange} required={false} 
+            options={optionsPriority} />
+        <SelectInput label="Category" name="category" value={formData.category} onChange={handleChange} required={false} 
+            options={optionsCategory} />
+        
         <div className="mb4">
             <label htmlFor="description" className="block font-semibold">Description</label>
             <textarea type="text" className="w-full p2 border rounded-lg" name="description" value={formData.description} 
