@@ -44,12 +44,12 @@ const NoteForm = ({ notes, setNotes }) => {
         {isFormVisible  ? 'Hide Form x' : 'Add New Note +' }
     </button>
     const formNote = <form onSubmit={handleSubmit} action="" className="mb-6">
-        <TextInput label="Title" name="title" value={formData.title} onChange={handleChange} required={false} />
+        <TextInput label="Title" name="title" value={formData.title} onChange={handleChange} required={true} />
         <SelectInput label="Priority" name="priority" value={formData.priority} onChange={handleChange} required={false} 
             options={optionsPriority} />
         <SelectInput label="Category" name="category" value={formData.category} onChange={handleChange} required={false} 
             options={optionsCategory} />
-        <TextAreaInput label="Description" name="description" value={formData.description} onChange={handleChange} required={false} />
+        <TextAreaInput label="Description" name="description" value={formData.description} onChange={handleChange} required={true} />
         <button className="w-full bg-purple-500 text-white py-2 rounded-lg cursor-pointer hover: bg-purple-600">
             Add Note
         </button>
